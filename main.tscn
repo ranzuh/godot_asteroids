@@ -1,11 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://b74u8cgikaf01"]
+[gd_scene load_steps=4 format=3 uid="uid://b74u8cgikaf01"]
 
 [ext_resource type="PackedScene" uid="uid://rsq2wvv6xxe2" path="res://Player.tscn" id="1_bpdhr"]
-[ext_resource type="Script" path="res://Player.gd" id="2_j5wci"]
+[ext_resource type="Script" path="res://main.gd" id="1_x25uu"]
+[ext_resource type="PackedScene" uid="uid://2lwdcf8l1c4b" path="res://Bullet.tscn" id="3_dpa16"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_x25uu")
+bullet_scene = ExtResource("3_dpa16")
 
 [node name="Player" parent="." instance=ExtResource("1_bpdhr")]
 position = Vector2(558, 309)
-script = ExtResource("2_j5wci")
 rotation_speed = 180.0
+
+[node name="ControlsTip" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 212.0
+offset_bottom = 137.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Controls:
+Left arrow - Rotate left
+Right arrow - Rotate right
+Up arrow - Thrust forward
+Space - Shoot
+"
+
+[connection signal="shoot" from="Player" to="." method="_on_player_shoot"]

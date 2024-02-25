@@ -6,6 +6,8 @@ extends Node2D
 
 var velocity = Vector2(100.0, 0.0)
 
+signal shoot
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -24,6 +26,8 @@ func _process(delta):
 		velocity += Vector2.RIGHT.rotated(rotation) * thrust * delta
 		velocity = velocity.limit_length(speed_limit)
 		#print(velocity.length())
+	if Input.is_action_just_pressed("ui_select"):
+		shoot.emit()
 		
 		
 	
