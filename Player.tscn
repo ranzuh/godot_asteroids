@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://rsq2wvv6xxe2"]
+
+[ext_resource type="Texture2D" uid="uid://bnu0v8ffektjy" path="res://ship.png" id="1_augpv"]
+
+[node name="Player" type="Node2D"]
+
+[node name="Ship" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_augpv")
