@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b74u8cgikaf01"]
+[gd_scene load_steps=5 format=3 uid="uid://b74u8cgikaf01"]
 
 [ext_resource type="PackedScene" uid="uid://rsq2wvv6xxe2" path="res://Player.tscn" id="1_bpdhr"]
 [ext_resource type="Script" path="res://main.gd" id="1_x25uu"]
 [ext_resource type="PackedScene" uid="uid://2lwdcf8l1c4b" path="res://Bullet.tscn" id="3_dpa16"]
+[ext_resource type="PackedScene" uid="uid://bra0vobs2j40m" path="res://Asteroid.tscn" id="4_w70m8"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_x25uu")
@@ -25,5 +26,20 @@ Right arrow - Rotate right
 Up arrow - Thrust forward
 Space - Shoot
 "
+
+[node name="Asteroid" parent="." instance=ExtResource("4_w70m8")]
+position = Vector2(950, 230)
+rotation = 0.691426
+scale = Vector2(-0.835165, -0.835165)
+
+[node name="Asteroid2" parent="." instance=ExtResource("4_w70m8")]
+position = Vector2(589, 567)
+rotation = 2.03212
+scale = Vector2(0.505232, 0.505232)
+
+[node name="Asteroid3" parent="." instance=ExtResource("4_w70m8")]
+position = Vector2(997, 574)
+rotation = 3.44632
+scale = Vector2(0.482223, 0.482223)
 
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]

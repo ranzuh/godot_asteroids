@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bra0vobs2j40m"]
+
+[ext_resource type="Texture2D" uid="uid://b1c4qpd5axpfc" path="res://asteroid.png" id="1_cjlnj"]
+[ext_resource type="Script" path="res://Asteroid.gd" id="1_fsibf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btip5"]
+radius = 13.4286
+height = 30.0
+
+[node name="Asteroid" type="Area2D"]
+monitorable = false
+script = ExtResource("1_fsibf")
+
+[node name="Asteroid" type="Sprite2D" parent="."]
+texture = ExtResource("1_cjlnj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -4)
+scale = Vector2(8.58556, 6.04)
+shape = SubResource("CapsuleShape2D_btip5")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
