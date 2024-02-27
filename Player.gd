@@ -4,21 +4,19 @@ extends Node2D
 @export var rotation_speed = 90.0
 @export var speed_limit = 300.0
 
-var velocity = Vector2(100.0, 0.0)
+@onready var audio_stream_player = $AudioStreamPlayer
+@onready var audio_stream_player_2 = $AudioStreamPlayer2
+
+
+var velocity = Vector2(10.0, 0.0)
 
 signal shoot
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-	
-func kill():
-	print("killed")
-	queue_free()
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
+	if Input.is_action_just_released("ui_up"):
+		if audio_stream_player_2.playing:
+			audio_stream_player_2.stop()
 	if Input.is_action_pressed("ui_right"):
 		#print("rotate right")
 		rotate(deg_to_rad(rotation_speed * delta))
@@ -29,10 +27,12 @@ func _process(delta):
 		#print("thrust forward")
 		velocity += Vector2.RIGHT.rotated(rotation) * thrust * delta
 		velocity = velocity.limit_length(speed_limit)
+		if not audio_stream_player_2.playing:
+			audio_stream_player_2.play()
 		#print(velocity.length())
 	if Input.is_action_just_pressed("ui_select"):
 		shoot.emit()
-		
-		
+		audio_stream_player.play()
+	
 	position += velocity * delta
 	

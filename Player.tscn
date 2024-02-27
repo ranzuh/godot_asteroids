@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://rsq2wvv6xxe2"]
+[gd_scene load_steps=6 format=3 uid="uid://rsq2wvv6xxe2"]
 
 [ext_resource type="Texture2D" uid="uid://bnu0v8ffektjy" path="res://ship.png" id="1_augpv"]
 [ext_resource type="Script" path="res://Player.gd" id="1_bfw2t"]
+[ext_resource type="AudioStream" uid="uid://dt0nk4yrdfv3e" path="res://laser.wav" id="3_jeijk"]
+[ext_resource type="AudioStream" uid="uid://bfb5kmgwy1vq2" path="res://thrust.wav" id="4_khtao"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_noeon"]
 
@@ -16,3 +18,10 @@ texture = ExtResource("1_augpv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.56, 1.32)
 shape = SubResource("CapsuleShape2D_noeon")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jeijk")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_khtao")
+volume_db = -8.0
