@@ -4,12 +4,17 @@ var velocity := Vector2(0.0, 0.0)
 
 signal blow_up(my_scale: Vector2, my_position: Vector2, my_velocity: Vector2)
 
+@onready var screen_size = get_viewport_rect().size
+@onready var cpu_particles_2d = $CPUParticles2D
+
 func _ready() -> void:
 	velocity.x = randf_range(-50.0, 50.0)
 	velocity.y = randf_range(-50.0, 50.0)
 
 func _process(delta: float) -> void:
 	position += velocity * delta
+	position.x = wrapf(position.x, 0, screen_size.x)
+	position.y = wrapf(position.y, 0, screen_size.y)
 
 func _on_area_entered(area: Area2D) -> void:
 	print(area.name)

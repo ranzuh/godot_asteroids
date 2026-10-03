@@ -3,6 +3,7 @@ extends Node2D
 @export var bullet_scene : PackedScene
 @export var bullet_speed = 500.0
 @export var asteroid_scene : PackedScene
+@export var particles : PackedScene
 
 
 var player
@@ -17,7 +18,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	var asteroids = get_tree().get_nodes_in_group("Asteroid")
+	print(len(asteroids))
+	if len(asteroids) == 0:
+		print("zero")
 	
 func _on_player_shoot():
 	print("shoot")
@@ -41,4 +45,7 @@ func _on_asteroid_blow_up(a_scale: Vector2, a_pos: Vector2, a_vel: Vector2):
 	print(a_scale)
 	if abs(a_scale.x) > 0.2:
 		for i in range(3): create_new_asteroid(a_scale, a_pos, a_vel)
+	var part = particles.instantiate()
+	part.position = a_pos
+	add_child(part)
 	

@@ -1,20 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://b74u8cgikaf01"]
+[gd_scene format=3 uid="uid://b74u8cgikaf01"]
 
 [ext_resource type="PackedScene" uid="uid://rsq2wvv6xxe2" path="res://Player.tscn" id="1_bpdhr"]
-[ext_resource type="Script" path="res://main.gd" id="1_x25uu"]
+[ext_resource type="Script" uid="uid://bly7iav5hwmmf" path="res://main.gd" id="1_x25uu"]
 [ext_resource type="PackedScene" uid="uid://2lwdcf8l1c4b" path="res://Bullet.tscn" id="3_dpa16"]
 [ext_resource type="PackedScene" uid="uid://bra0vobs2j40m" path="res://Asteroid.tscn" id="4_w70m8"]
+[ext_resource type="PackedScene" uid="uid://bq2dq40feccu0" path="res://cpu_particles_2d.tscn" id="5_xo8gj"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=616966479]
 script = ExtResource("1_x25uu")
 bullet_scene = ExtResource("3_dpa16")
 asteroid_scene = ExtResource("4_w70m8")
+particles = ExtResource("5_xo8gj")
 
-[node name="Player" parent="." instance=ExtResource("1_bpdhr")]
+[node name="Player" parent="." unique_id=580856486 instance=ExtResource("1_bpdhr")]
 position = Vector2(558, 309)
 rotation_speed = 180.0
 
-[node name="ControlsTip" type="Label" parent="."]
+[node name="ControlsTip" type="Label" parent="." unique_id=1499739638]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 212.0
@@ -28,17 +30,17 @@ Up arrow - Thrust forward
 Space - Shoot
 "
 
-[node name="Asteroid" parent="." instance=ExtResource("4_w70m8")]
+[node name="Asteroid" parent="." unique_id=853478626 instance=ExtResource("4_w70m8")]
 position = Vector2(950, 230)
 rotation = 0.691426
 scale = Vector2(-0.835165, -0.835165)
 
-[node name="Asteroid2" parent="." instance=ExtResource("4_w70m8")]
+[node name="Asteroid2" parent="." unique_id=611322353 instance=ExtResource("4_w70m8")]
 position = Vector2(589, 567)
 rotation = 2.03212
 scale = Vector2(0.505232, 0.505232)
 
-[node name="Asteroid3" parent="." instance=ExtResource("4_w70m8")]
+[node name="Asteroid3" parent="." unique_id=1528421460 instance=ExtResource("4_w70m8")]
 position = Vector2(997, 574)
 rotation = 3.44632
 scale = Vector2(0.482223, 0.482223)
