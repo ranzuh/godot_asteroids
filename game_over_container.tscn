@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b810m5bawcavk"]
+
+[node name="GameOverContainer" type="Control" unique_id=1461149755]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameOverLabel" type="Label" parent="." unique_id=1427862407]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 308.5
+offset_top = 167.0
+offset_right = 932.5
+offset_bottom = 304.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=402018279]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 395.0
+offset_top = 430.0
+offset_right = 845.0
+offset_bottom = 594.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayAgainButton" type="Button" parent="VBoxContainer" unique_id=2098762957]
+layout_mode = 2
+text = "PLAY AGAIN"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=1836224732]
+layout_mode = 2
+text = "EXIT"

@@ -8,26 +8,22 @@ extends Node2D
 
 var player
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	player = $Player
 	
 	var asteroids = get_tree().get_nodes_in_group("Asteroid")
 	for a in asteroids:
 		a.blow_up.connect(_on_asteroid_blow_up)
+		a.player_hit.connect(_on_asteroid_player_hit)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var asteroids = get_tree().get_nodes_in_group("Asteroid")
-	print(len(asteroids))
 	if len(asteroids) == 0:
 		print("zero")
 	
 func _on_player_shoot():
-	print("shoot")
 	var bullet = bullet_scene.instantiate()
 	bullet.position = player.position
-	#bullet.velocity = player.velocity
 	bullet.velocity = Vector2.RIGHT.rotated(player.rotation) * bullet_speed
 	bullet.rotate(player.rotation)
 	add_child(bullet)
@@ -35,6 +31,7 @@ func _on_player_shoot():
 func create_new_asteroid(s, p, v):
 	var asteroid = asteroid_scene.instantiate()
 	asteroid.blow_up.connect(_on_asteroid_blow_up)
+	asteroid.player_hit.connect(_on_asteroid_player_hit)
 	asteroid.scale = s / 2
 	asteroid.position = p
 	asteroid.velocity = v
@@ -42,10 +39,17 @@ func create_new_asteroid(s, p, v):
 	add_child(asteroid)
 
 func _on_asteroid_blow_up(a_scale: Vector2, a_pos: Vector2, a_vel: Vector2):
-	print(a_scale)
 	if abs(a_scale.x) > 0.2:
 		for i in range(3): create_new_asteroid(a_scale, a_pos, a_vel)
 	var part = particles.instantiate()
 	part.position = a_pos
 	add_child(part)
-	
+
+func end_game():
+	$GameOverContainer.show()
+
+func _on_asteroid_player_hit(player_pos: Vector2) -> void:
+	var part = particles.instantiate()
+	part.position = player_pos
+	add_child(part)
+	end_game()

@@ -6,7 +6,7 @@ extends Node2D
 
 @onready var audio_stream_player = $AudioStreamPlayer
 @onready var audio_stream_player_2 = $AudioStreamPlayer2
-
+@onready var screen_size = get_viewport_rect().size
 
 var velocity = Vector2(10.0, 0.0)
 
@@ -35,4 +35,7 @@ func _physics_process(delta):
 		audio_stream_player.play()
 	
 	position += velocity * delta
+	
+	position.x = wrapf(position.x, 0, screen_size.x)
+	position.y = wrapf(position.y, 0, screen_size.y)
 	

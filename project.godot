@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="asteroids"
-run/main_scene="res://main.tscn"
+run/main_scene="uid://co6ekcvaveerc"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
@@ -24,6 +24,10 @@ config/icon="res://icon.svg"
 window/size/viewport_width=1280
 window/size/viewport_height=800
 window/stretch/mode="viewport"
+
+[gui]
+
+theme/custom="uid://d32y07dmpxhrs"
 
 [rendering]
 

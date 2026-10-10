@@ -5,8 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://2lwdcf8l1c4b" path="res://Bullet.tscn" id="3_dpa16"]
 [ext_resource type="PackedScene" uid="uid://bra0vobs2j40m" path="res://Asteroid.tscn" id="4_w70m8"]
 [ext_resource type="PackedScene" uid="uid://bq2dq40feccu0" path="res://cpu_particles_2d.tscn" id="5_xo8gj"]
+[ext_resource type="Script" uid="uid://dqeu0behkt8et" path="res://menu_button.gd" id="6_7mycd"]
+[ext_resource type="AudioStream" uid="uid://mgwlmkp8dwm3" path="res://synthloop.wav" id="7_272bh"]
 
-[node name="Main" type="Node2D" unique_id=616966479]
+[node name="Main" type="Node2D" unique_id=1102044059]
 script = ExtResource("1_x25uu")
 bullet_scene = ExtResource("3_dpa16")
 asteroid_scene = ExtResource("4_w70m8")
@@ -32,8 +34,8 @@ Space - Shoot
 
 [node name="Asteroid" parent="." unique_id=853478626 instance=ExtResource("4_w70m8")]
 position = Vector2(950, 230)
-rotation = 0.691426
-scale = Vector2(-0.835165, -0.835165)
+rotation = -2.4501667
+scale = Vector2(0.835165, 0.835165)
 
 [node name="Asteroid2" parent="." unique_id=611322353 instance=ExtResource("4_w70m8")]
 position = Vector2(589, 567)
@@ -42,7 +44,62 @@ scale = Vector2(0.505232, 0.505232)
 
 [node name="Asteroid3" parent="." unique_id=1528421460 instance=ExtResource("4_w70m8")]
 position = Vector2(997, 574)
-rotation = 3.44632
+rotation = -2.8368652
 scale = Vector2(0.482223, 0.482223)
 
+[node name="GameOverContainer" type="Control" parent="." unique_id=1584806213]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 800.0
+
+[node name="GameOverLabel" type="Label" parent="GameOverContainer" unique_id=1427862407]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = -172.0
+offset_right = 272.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverContainer" unique_id=402018279]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = 10.0
+offset_right = 225.0
+offset_bottom = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayAgainButton" type="Button" parent="GameOverContainer/VBoxContainer" unique_id=2098762957]
+layout_mode = 2
+text = "PLAY AGAIN"
+script = ExtResource("6_7mycd")
+
+[node name="ExitButton" type="Button" parent="GameOverContainer/VBoxContainer" unique_id=1836224732]
+layout_mode = 2
+text = "EXIT"
+script = ExtResource("6_7mycd")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1673178056]
+stream = ExtResource("7_272bh")
+autoplay = true
+
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
+[connection signal="pressed" from="GameOverContainer/VBoxContainer/PlayAgainButton" to="GameOverContainer/VBoxContainer/PlayAgainButton" method="_on_play_pressed"]
+[connection signal="pressed" from="GameOverContainer/VBoxContainer/ExitButton" to="GameOverContainer/VBoxContainer/ExitButton" method="_on_quit_pressed"]
