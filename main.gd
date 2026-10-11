@@ -44,6 +44,7 @@ func _on_asteroid_blow_up(a_scale: Vector2, a_pos: Vector2, a_vel: Vector2):
 	var part = particles.instantiate()
 	part.position = a_pos
 	add_child(part)
+	$EffectPlayer.play()
 
 func end_game():
 	$GameOverContainer.show()
@@ -52,4 +53,5 @@ func _on_asteroid_player_hit(player_pos: Vector2) -> void:
 	var part = particles.instantiate()
 	part.position = player_pos
 	add_child(part)
+	$EffectPlayer.play()
 	end_game()

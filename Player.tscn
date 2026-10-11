@@ -1,27 +1,52 @@
-[gd_scene load_steps=6 format=3 uid="uid://rsq2wvv6xxe2"]
+[gd_scene format=3 uid="uid://rsq2wvv6xxe2"]
 
 [ext_resource type="Texture2D" uid="uid://bnu0v8ffektjy" path="res://ship.png" id="1_augpv"]
-[ext_resource type="Script" path="res://Player.gd" id="1_bfw2t"]
+[ext_resource type="Script" uid="uid://olk2mscastv6" path="res://Player.gd" id="1_bfw2t"]
 [ext_resource type="AudioStream" uid="uid://dt0nk4yrdfv3e" path="res://laser.wav" id="3_jeijk"]
 [ext_resource type="AudioStream" uid="uid://bfb5kmgwy1vq2" path="res://thrust.wav" id="4_khtao"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_noeon"]
 
-[node name="Player" type="Area2D" groups=["Player"]]
+[sub_resource type="Gradient" id="Gradient_e80uo"]
+offsets = PackedFloat32Array(0.009852217, 0.86206895, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.4846154, 0.4846154, 0.4846154, 1, 0, 0, 0, 1)
+
+[node name="Player" type="Area2D" unique_id=77448392 groups=["Player"]]
 monitoring = false
 script = ExtResource("1_bfw2t")
 
-[node name="Ship" type="Sprite2D" parent="."]
+[node name="Ship" type="Sprite2D" parent="." unique_id=1042469238]
 rotation = 1.5708
 texture = ExtResource("1_augpv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=326654307]
 scale = Vector2(1.56, 1.32)
 shape = SubResource("CapsuleShape2D_noeon")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=543081307]
 stream = ExtResource("3_jeijk")
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=733828246]
 stream = ExtResource("4_khtao")
 volume_db = -8.0
+
+[node name="Timer" type="Timer" parent="." unique_id=104503384]
+wait_time = 0.33
+
+[node name="EngineParticles" type="CPUParticles2D" parent="." unique_id=728311335]
+z_index = -1
+emitting = false
+amount = 32
+lifetime = 0.3
+speed_scale = 8.0
+direction = Vector2(-1, 0)
+spread = 7.52
+gravity = Vector2(0, 0)
+initial_velocity_min = 92.76
+initial_velocity_max = 133.91
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+color = Color(0.812481, 0.529472, 0, 1)
+color_ramp = SubResource("Gradient_e80uo")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

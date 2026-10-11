@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bq2dq40feccu0" path="res://cpu_particles_2d.tscn" id="5_xo8gj"]
 [ext_resource type="Script" uid="uid://dqeu0behkt8et" path="res://menu_button.gd" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://mgwlmkp8dwm3" path="res://synthloop.wav" id="7_272bh"]
+[ext_resource type="AudioStream" uid="uid://fuypsmlpqgym" path="res://explosion2.wav" id="8_5vw27"]
 
 [node name="Main" type="Node2D" unique_id=1102044059]
 script = ExtResource("1_x25uu")
@@ -99,6 +100,9 @@ script = ExtResource("6_7mycd")
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1673178056]
 stream = ExtResource("7_272bh")
 autoplay = true
+
+[node name="EffectPlayer" type="AudioStreamPlayer" parent="." unique_id=897195413]
+stream = ExtResource("8_5vw27")
 
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
 [connection signal="pressed" from="GameOverContainer/VBoxContainer/PlayAgainButton" to="GameOverContainer/VBoxContainer/PlayAgainButton" method="_on_play_pressed"]

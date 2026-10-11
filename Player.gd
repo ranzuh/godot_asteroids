@@ -9,6 +9,8 @@ extends Node2D
 @onready var screen_size = get_viewport_rect().size
 
 var velocity = Vector2(10.0, 0.0)
+var can_shoot = true
+
 
 signal shoot
 
@@ -17,6 +19,7 @@ func _physics_process(delta):
 	if Input.is_action_just_released("ui_up"):
 		if audio_stream_player_2.playing:
 			audio_stream_player_2.stop()
+			$EngineParticles.emitting = false
 	if Input.is_action_pressed("ui_right"):
 		#print("rotate right")
 		rotate(deg_to_rad(rotation_speed * delta))
@@ -29,13 +32,20 @@ func _physics_process(delta):
 		velocity = velocity.limit_length(speed_limit)
 		if not audio_stream_player_2.playing:
 			audio_stream_player_2.play()
+		$EngineParticles.emitting = true
 		#print(velocity.length())
 	if Input.is_action_just_pressed("ui_select"):
-		shoot.emit()
-		audio_stream_player.play()
+		if can_shoot:
+			shoot.emit()
+			audio_stream_player.play()
+			can_shoot = false
+			$Timer.start()
 	
 	position += velocity * delta
 	
 	position.x = wrapf(position.x, 0, screen_size.x)
 	position.y = wrapf(position.y, 0, screen_size.y)
-	
+
+
+func _on_timer_timeout() -> void:
+	can_shoot = true
